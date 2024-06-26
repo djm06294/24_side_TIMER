@@ -2,6 +2,7 @@ let elapsedTime = 0;
 
 var timer;
 var istrue = false;
+var isTiming = false;
 
 let hours = 0;
 let minutes = 0;
@@ -58,6 +59,10 @@ function btn_click(button) {
 
 
 startBtn.addEventListener('click', () => {
+    if(elapsedTime == 0) return
+    if(isTiming) return
+
+    isTiming = true;
     startTimer();
     console.log('timer start!');
 })
@@ -74,7 +79,8 @@ function startTimer() {
     setTimeout(()=> {
         if(elapsedTime == 0) {
             showTime();
-            alert("Timer End!!");
+            if(isTiming) alert("Timer End!!");
+            isTiming = false;
             reset();
             return
         }
@@ -88,6 +94,7 @@ function showTime() {
 }
 
 function reset() {
+    isTiming = false;
     elapsedTime = 0;
 
     hours = 0;
