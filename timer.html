@@ -16,8 +16,8 @@
         <p id="timerDisplay">00H:00M:00S</p>
         <br>
         <div>
-            <button id="time_Btn" onclick="btn_click(0)" onmousedown="btn_lclick_dn(0)" onmouseup="btn_lclick_up()">+</button>
-            <button id="time_Btn" onclick="btn_click(1)" onmousedown="btn_lclick_dn(1)" onmouseup="btn_lclick_up()">-</button>
+            <button class="time_Btn" onclick="btn_click(0)" onmousedown="btn_lclick_dn(0)" onmouseup="btn_lclick_up()">+</button>
+            <button class="time_Btn" onclick="btn_click(1)" onmousedown="btn_lclick_dn(1)" onmouseup="btn_lclick_up()">-</button>
         </div>
         <div>
             <button id="time_Btn" onclick="btn_click(2)"onmousedown="btn_lclick_dn(2)" onmouseup="btn_lclick_up()">+</button>
@@ -29,6 +29,8 @@
         </div>
 
         <button type="button" id="start-Btn" value="Start">시작</button>
+        <button type="button" id="reset-Btn" value="Reset">재설정</button>
+
         <div id="result"></div>
     </div>
     <script src="timer.js"></script>

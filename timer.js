@@ -1,5 +1,4 @@
 let elapsedTime = 0;
-let endTime = 0;
 
 var timer;
 var istrue = false;
@@ -10,6 +9,12 @@ let seconds = 0;
 
 const timeDisplay = document.getElementById('time-display');
 const startBtn = document.getElementById('start-Btn');
+const resetBtn = document.getElementById('reset-Btn');
+const btns = document.getElementsByClassName('time_Btn');
+
+console.log(btns[0])
+console.log(btns[1])
+console.log(typeof(btns))
 
 function formatTime(totTime_ms) {
     const totTime = Math.floor(totTime_ms/1000);
@@ -25,7 +30,6 @@ function btn_click(button) {
     if(button === 0) {
         if(hours!=99) {
             hours = hours+1;
-            console.log('hour++');
         }
     } else if(button === 1) {
         if(hours!=0) {
@@ -48,35 +52,45 @@ function btn_click(button) {
             seconds = seconds - 1;
         }
     }
-    showTime();
+    elapsedTime = ((hours * 3600) + (minutes * 60) + seconds) * 1000;
+    showTime();    
 }
 
-function btn_lclick_dn(btnNum) {
-    istrue = true;
-    if(istrue===true) console.log('it is surely true');
-    timer = setTimeout(function(){ holding(btnNum);}, 3000);
-}
-function btn_lclick_up() {
-    istrue = false;
-    console.log('its false');
-}
-function holding(btnNum) {
-    console.log('timeout!');
-    if(istrue) console.log("its true");
-    if(timer) clearTimeout(timer);
-    while(istrue) {
-        btn_click(btnNum);
-        console.log('true!');
-    }
-}
 
 startBtn.addEventListener('click', () => {
-    elapsedTime = ((hours * 3600) + (minutes * 60) + seconds) * 1000;
-    timerDisplay.textContent = formatTime(elapsedTime);
+    startTimer();
+    console.log('timer start!');
 })
 
-function showTime() {
-    elapsedTime = ((hours * 3600) + (minutes * 60) + seconds) * 1000;
-    timerDisplay.textContent = formatTime(elapsedTime);
+resetBtn.addEventListener('click', () => {
+    reset();
+    showTime();
+})
 
+function startTimer() {
+    elapsedTime -= 1000;
+    showTime(); 
+    
+    setTimeout(()=> {
+        if(elapsedTime == 0) {
+            showTime();
+            alert("Timer End!!");
+            reset();
+            return
+        }
+
+        startTimer();
+    }, 1000);
+}
+
+function showTime() {
+    timerDisplay.textContent = formatTime(elapsedTime);
+}
+
+function reset() {
+    elapsedTime = 0;
+
+    hours = 0;
+    minutes = 0;
+    seconds = 0;
 }
